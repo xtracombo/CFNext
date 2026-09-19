@@ -3,7 +3,7 @@ const _0x1af6f6=_0x1be2;(function(_0xa5a344,_0x26513c){const _0x10c45c=_0x1be2,_
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CFNext · 管理面板</title>
+<title>CFNext · Panel Manajemen</title>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 <style>
 :root{--bg:#0d1117;--card:#161b22;--card2:#1c2230;--line:#2d333b;--txt:#e6edf3;--dim:#8b949e;--acc:#4f9dff;--ok:#3fb950;--warn:#d29922;--err:#f85149}
@@ -94,124 +94,124 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
 <body>
 <div class="wrap">
 <header>
-  <div class="logo"><span>CF</span></div>
+  <div class="logo"><span>CG</span></div>
   <div>
-    <h1>CFNext</h1>
-    <div class="sub">Cloudflare 代理管理面板 · 全新编写</div>
+    <h1>Club-Gratis</h1>
+    <div class="sub">Dasbor Manajemen Agen Cloudflare - Versi Terbaru yang Ditulis Ulang</div>
   </div>
-  <div style="margin-left:auto;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px"><button id='themeBtn' class='btn sm' onclick='toggleTheme()' style='font-size:14px;padding:2px 8px'>🌙</button><button id="hdrInfo" class="btn sm" onclick="checkUpdate()" title="点击检测 GitHub 仓库更新" style="font-size:12px;padding:2px 8px">加载中…</button></div>
+  <div style="margin-left:auto;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px"><button id='themeBtn' class='btn sm' onclick='toggleTheme()' style='font-size:14px;padding:2px 8px'>🌙</button><button id="hdrInfo" class="btn sm" onclick="checkUpdate()" title="Klik untuk memeriksa pembaruan repositori GitHub" style="font-size:12px;padding:2px 8px">Memuat…</button></div>
 </header>
 <nav id="nav">
-  <button data-tab="overview" class="on">总览</button>
-  <button data-tab="nodes">节点配置</button>
-  <button data-tab="pick">优选器</button>
-  <button data-tab="help">关于项目</button>
+  <button data-tab="overview" class="on">Ringkasan</button>
+  <button data-tab="nodes">Konfigurasi Node</button>
+  <button data-tab="pick">Selektor</button>
+  <button data-tab="help">Tentang proyek</button>
 </nav>
-<!-- 总览 -->
+<!-- Ringkasan -->
 <div class="tab on" id="tab-overview">
   <div class="card">
-    <h2>快速开始</h2>
+    <h2>Panduan Singkat</h2>
     <div id="wdwarn" style="display:none;background:rgba(242,85,73,.12);border:1px solid rgba(242,85,73,.4);color:#ff9c98;border-radius:8px;padding:8px 12px;font-size:12px;margin-bottom:10px">检测到当前通过 *.workers.dev 访问。该域名大陆直连常被阻断，下发的节点 SNI 取自访问域名，会导致客户端真连接延时全部 -1。请到 Cloudflare Workers 绑定自定义域名后，用自定义域名访问面板与订阅。</div>
     <div class="grid3">
       <div class="card" style="margin:0">
-        <h2>1. 免配置使用（小白专属）</h2>
-        <p style="color:var(--dim);font-size:13px">部署即可用，直接点击下方复制订阅链接导入客户端。Clash Verge / V2rayN / V2rayNG / SingBox 等客户端均可直接使用（Trojan 节点在 Clash Verge 自动携带 SNI 可用；V2rayNG 无需开启「本地 DNS」）。</p>
+        <h2>1. Tidak memerlukan konfigurasi (khusus untuk pemula)</h2>
+        <p style="color:var(--dim);font-size:13px">Langsung terapkan dan gunakan. Cukup klik tautan di bawah ini untuk menyalin langganan dan mengimpornya ke klien Anda. Klien seperti Clash Verge, V2rayN, V2rayNG, dan SingBox dapat digunakan secara langsung (node Trojan di Clash Verge secara otomatis menyertakan SNI dan tersedia; V2rayNG tidak memerlukan pengaktifan "Local DNS").</p>
       </div>
       <div class="card" style="margin:0">
-        <h2>2. 配置协议使用</h2>
-        <p style="color:var(--dim);font-size:13px">根据需要在节点配置选项中配置 VLESS / Trojan / XHTTP 协议、节点数量控制、TLS、ECH，保存后生效。Trojan 已支持 Clash Verge / Mihomo；XHTTP 需绑定自定义域名（须开启 gRPC）；V2rayNG 已内置远端 DNS 支持（UDP→DoH），无需开启「本地 DNS」。</p>
+        <h2>2. Penggunaan Protokol Konfigurasi</h2>
+        <p style="color:var(--dim);font-size:13px">Konfigurasikan protokol VLESS/Trojan/XHTTP, kontrol jumlah node, TLS, dan ECH di opsi konfigurasi node sesuai kebutuhan, lalu simpan untuk menerapkan perubahan. Trojan sudah mendukung Clash Verge/Mihomo; XHTTP memerlukan pengikatan ke nama domain khusus (gRPC harus diaktifkan); V2rayNG memiliki dukungan DNS jarak jauh bawaan (UDP→DoH), jadi tidak perlu mengaktifkan "DNS Lokal".</p>
       </div>
       <div class="card" style="margin:0">
-        <h2>3. 优选方式使用</h2>
-        <p style="color:var(--dim);font-size:13px">在优选器选项中将订阅模式改为【自定义订阅（支持汇聚）】或【随机优选模式（官方接口）】进行使用，【自定义订阅（支持汇聚）】模式内置 6 个在线源（可根据需求增删），在线优选需开启【自定义订阅（支持汇聚）】选项后方可使用。</p>
+        <h2>3. Metode penggunaan yang disarankan</h2>
+        <p style="color:var(--dim);font-size:13px">Pada opsi Optimizer, ubah mode berlangganan menjadi "Langganan Kustom (Mendukung Agregasi)" atau "Mode Optimasi Acak (Antarmuka Resmi)". Mode "Langganan Kustom (Mendukung Agregasi)" memiliki 6 sumber online bawaan (yang dapat ditambahkan atau dihapus sesuai kebutuhan). Optimasi online hanya dapat digunakan setelah opsi "Langganan Kustom (Mendukung Agregasi)" diaktifkan.</p>
       </div>
     </div>
   </div>
   <div class="card">
-    <h2>地区与筛选</h2>
+    <h2>Wilayah dan Filter</h2>
     <div class="grid">
       <div class="field" style="display:flex;flex-direction:column">
-        <label>地区选择</label>
+        <label>Pilih Wilayah</label>
         <select id="fl-region" style="max-width:280px" onchange="markDirty();makeSub(false)">
-          <option value="all">全部节点</option>
-          <option value="HK">HK 香港</option>
-          <option value="TW">TW 台湾</option>
-          <option value="US">US 美国</option>
-          <option value="SG">SG 新加坡</option>
-          <option value="JP">JP 日本</option>
-          <option value="KR">KR 韩国</option>
-          <option value="DE">DE 德国</option>
+          <option value="all">Semua node</option>
+          <option value="HK">HK (Hong Kong)</option>
+          <option value="TW">TW (Taiwan)</option>
+          <option value="US">US (Amerika Serikat)</option>
+          <option value="SG">SG (Singapore)</option>
+          <option value="JP">JP (Jepang)</option>
+          <option value="KR">KR (Korea Selatan)</option>
+          <option value="DE">DE (Jerman)</option>
         </select>
-        <p class="hint" style="color:var(--dim);font-size:12px;margin-top:auto;padding-top:5px">节点名称含地区标记（HK/香港、TW/台湾、US/美国…）即仅下发该地区</p>
+        <p class="hint" style="color:var(--dim);font-size:12px;margin-top:auto;padding-top:5px">Nama node yang berisi pengidentifikasi wilayah (HK/Hong Kong, TW/Taiwan, US/Amerika Serikat, dll.) menunjukkan bahwa distribusi hanya tersedia untuk wilayah tersebut.</p>
       </div>
       <div class="field" style="display:flex;flex-direction:column">
-        <label>筛选设置</label>
+        <label>Pengaturan Filter</label>
         <div class="chk-groups">
           <div class="chk-group">
-            <span class="chk-gt">IP类型</span>
+            <span class="chk-gt">Tipe IP</span>
             <label class="chk"><input type="checkbox" id="fl-ipv4" checked onchange="markDirty()"> IPv4</label>
             <label class="chk"><input type="checkbox" id="fl-ipv6" checked onchange="markDirty()"> IPv6</label>
           </div>
           <div class="chk-group">
-            <span class="chk-gt">运营商</span>
-            <label class="chk"><input type="checkbox" id="fl-isp-mobile" checked onchange="markDirty()"> 移动</label>
-            <label class="chk"><input type="checkbox" id="fl-isp-unicom" checked onchange="markDirty()"> 联通</label>
-            <label class="chk"><input type="checkbox" id="fl-isp-telecom" checked onchange="markDirty()"> 电信</label>
+            <span class="chk-gt">Operator</span>
+            <label class="chk"><input type="checkbox" id="fl-isp-mobile" checked onchange="markDirty()"> Bergerak</label>
+            <label class="chk"><input type="checkbox" id="fl-isp-unicom" checked onchange="markDirty()"> China Unicom</label>
+            <label class="chk"><input type="checkbox" id="fl-isp-telecom" checked onchange="markDirty()"> Telekomunikasi</label>
           </div>
         </div>
-        <p class="hint" style="color:var(--dim);font-size:12px;margin-top:auto;padding-top:5px">取消勾选即过滤；IP 类型按地址、运营商按名称匹配</p>
+        <p class="hint" style="color:var(--dim);font-size:12px;margin-top:auto;padding-top:5px">Hapus centang pada kotak untuk memfilter; cocokkan jenis IP berdasarkan alamat dan ISP berdasarkan nama.</p>
       </div>
     </div>
   </div>
   <div class="card">
-    <h2>订阅地址</h2>
+    <h2>URL Langganan</h2>
     <div class="field">
-      <label>客户端格式</label>
+      <label>Format klien</label>
       <select id="subFmt" onchange="makeSub(false)">
-        <option value="auto">自动识别（UA）</option>
+        <option value="auto">Identifikasi Pengguna Otomatis（UA）</option>
         <option value="clash">Clash YAML</option>
         <option value="singbox">Sing-box JSON</option>
         <option value="surge">Surge</option>
         <option value="loon">Loon</option>
         <option value="quanx">Quantumult X</option>
-        <option value="v2ray">v2ray / 通用链接</option>
+        <option value="v2ray">v2ray / Tautan Universal</option>
       </select>
     </div>
     <div class="field">
-      <label>订阅链接</label>
+      <label>Tautan berlangganan</label>
       <div class="row">
         <input id="subUrl" readonly style="flex:1">
-        <button class="btn" onclick="copySub()">复制</button>
-        <button class="btn" onclick="showQRCode()">二维码</button>
-        <button class="btn primary" onclick="downloadSub()">下载</button>
+        <button class="btn" onclick="copySub()">Salin</button>
+        <button class="btn" onclick="showQRCode()">Kode QR</button>
+        <button class="btn primary" onclick="downloadSub()">Download</button>
       </div>
       <div id="qrWrap"></div>
     </div>
   </div>
   <div class="card">
-    <h2>运行状态</h2>
-    <div id="statusBox"><div class="loading">加载中…</div></div>
+    <h2>Status Operasional</h2>
+    <div id="statusBox"><div class="loading">Memuat…</div></div>
   </div>
 </div>
-<!-- 节点配置 -->
+<!-- Konfigurasi Node -->
 <div class="tab" id="tab-nodes">
   <div class="card">
-    <h2>基础配置</h2>
+    <h2>Konfigurasi dasar</h2>
     <div class="grid">
-      <div class="field"><label>面板路径</label><input id="f-path" placeholder="留空使用 UUID"></div>
-      <div class="field"><label>管理密码（留空无需登录）</label><input id="f-admin" type="password" placeholder="可选"></div>
+      <div class="field"><label>Jalur panel</label><input id="f-path" placeholder="Biarkan kosong untuk menggunakan UUID."></div>
+      <div class="field"><label>Kata sandi administrator (biarkan kosong, tidak perlu login)</label><input id="f-admin" type="password" placeholder="Opsional"></div>
     </div>
     <div class="grid">
-      <div class="field"><label>VLESS UUID</label><input id="f-uuid" placeholder="留空自动生成"></div>
-      <div class="field"><label>自定义 SNI / Host（留空用 Worker 域名）</label><input id="f-host" placeholder="your.domain.com"></div>
+      <div class="field"><label>VLESS UUID</label><input id="f-uuid" placeholder="Dihasilkan secara otomatis jika dibiarkan kosong"></div>
+      <div class="field"><label>SNI/Host Kustom (biarkan kosong dan gunakan domain Worker)</label><input id="f-host" placeholder="your.domain.com"></div>
     </div>
-    <div class="hint" style="margin:0;font-size:11px;color:var(--dim)">UUID 为 VLESS 用户认证 ID；面板路径为访问面板的 URL 路径，留空时与 UUID 相同。</div>
+    <div class="hint" style="margin:0;font-size:11px;color:var(--dim)">UUID adalah ID otentikasi pengguna VLESS; jalur panel adalah jalur URL untuk mengakses panel, dan sama dengan UUID jika dibiarkan kosong.</div>
   </div>
   <div class="card">
-    <h2>节点配置</h2>
+    <h2>Konfigurasi Node</h2>
     <div class="grid">
-      <div class="field"><label>ALPN（留空由客户端协商）</label><select id="f-alpn">
-        <option value="">自动</option>
+      <div class="field"><label>ALPN (Kosongkan untuk negosiasi klien)</label><select id="f-alpn">
+        <option value="">otomatis</option>
         <option value="h3">h3</option>
         <option value="h2">h2</option>
         <option value="http/1.1">http/1.1</option>
@@ -219,7 +219,7 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
         <option value="h2,http/1.1">h2,http/1.1</option>
         <option value="h3,h2,http/1.1">h3,h2,http/1.1</option>
       </select></div>
-      <div class="field"><label>TLS 控制（开启仅下发 TLS 端口节点）</label>
+      <div class="field"><label>Kontrol TLS (Aktifkan distribusi khusus TLS ke node port)</label>
         <select id="f-tlsOnly">
           <option value="false">关闭</option>
           <option value="true">开启</option>
@@ -229,8 +229,8 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
     <div class="grid" style="margin-bottom:0">
       <div class="field" style="margin-bottom:0"><label>节点数量控制（开启后限制下发节点总数）</label>
         <select id="f-nodeLimit" onchange="onNodeLimit()">
-          <option value="false">关闭</option>
-          <option value="true">开启</option>
+          <option value="false">penutup</option>
+          <option value="true">Membuka</option>
         </select>
       </div>
       <div class="field" id="f-nodeLimitWrap" style="margin-bottom:0;display:none"><label>下发节点数量</label>
