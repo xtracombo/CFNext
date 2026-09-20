@@ -221,92 +221,92 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
       </select></div>
       <div class="field"><label>Kontrol TLS (Aktifkan distribusi khusus TLS ke node port)</label>
         <select id="f-tlsOnly">
-          <option value="false">关闭</option>
-          <option value="true">开启</option>
+          <option value="false">Menutup</option>
+          <option value="true">Menyalakan</option>
         </select>
       </div>
     </div>
     <div class="grid" style="margin-bottom:0">
-      <div class="field" style="margin-bottom:0"><label>节点数量控制（开启后限制下发节点总数）</label>
+      <div class="field" style="margin-bottom:0"><label>Kontrol jumlah node (membatasi total jumlah node yang di-deploy saat diaktifkan)</label>
         <select id="f-nodeLimit" onchange="onNodeLimit()">
-          <option value="false">penutup</option>
+          <option value="false">Menutup</option>
           <option value="true">Membuka</option>
         </select>
       </div>
-      <div class="field" id="f-nodeLimitWrap" style="margin-bottom:0;display:none"><label>下发节点数量</label>
+      <div class="field" id="f-nodeLimitWrap" style="margin-bottom:0;display:none"><label>Jumlah node yang akan disebarkan</label>
         <input id="f-nodeLimitCount" type="number" min="1" max="800" value="100">
-        <p class="hint">开启后最多下发该数量的节点；免费版 10ms CPU 硬限内，结构化格式（Clash/Singbox/Surge 等）上限 300、行格式（v2ray）上限 800，超出部分自动钳制</p>
+        <p class="hint">Setelah diaktifkan, node akan diterapkan hingga batas ini; untuk versi gratis—yang tunduk pada batas keras (hard limit) CPU 10ms—jumlah maksimumnya adalah 300 untuk format terstruktur (Clash, Sing-box, Surge, dll.) dan 800 untuk format berbasis baris (v2ray), dengan kelebihan apa pun akan dibatasi secara otomatis.</p>
       </div>
-      <div class="field" style="margin-bottom:0"><label>轮询机制（开启后每次更新订阅下发不同节点）</label>
+      <div class="field" style="margin-bottom:0"><label>Mekanisme polling (jika diaktifkan, node yang berbeda ditetapkan setiap kali langganan diperbarui)</label>
         <select id="f-polling" onchange="markDirty()">
-          <option value="true">开启</option>
-          <option value="false">关闭</option>
+          <option value="true">Membuka</option>
+          <option value="false">Menutup</option>
         </select>
-        <p class="hint">开启：每次更新订阅轮询下发新节点（默认上限 Clash 300 / V2rayN 800）；关闭：不轮询换新、一次性下发全部节点（节点数量控制不受影响，开启后仍按设定数量限制）</p>
+        <p class="hint">Diaktifkan: Node baru didistribusikan melalui *polling* setiap kali langganan diperbarui (batas default: 300 untuk Clash, 800 untuk V2RayN); Dinonaktifkan: Tidak ada *polling* untuk node baru; semua node didistribusikan sekaligus (pengaturan jumlah node tidak terpengaruh; batasan kuantitas yang dikonfigurasi tetap berlaku).</p>
       </div>
     </div>
   </div>
   <div class="card">
-    <h2>ECH 配置</h2>
+    <h2>Konfigurasi ECH</h2>
     <div class="grid">
-      <div class="field" style="margin-bottom:0"><label>ECH 加密</label>
+      <div class="field" style="margin-bottom:0"><label>Enkripsi ECH</label>
         <select id="f-ech">
-          <option value="false">关闭</option>
-          <option value="true">开启</option>
+          <option value="false">Menutup</option>
+          <option value="true">Membuka</option>
         </select>
-        <p class="hint">关闭使用默认 ECH 配置，开启 ECH 加密 TLS 握手隐藏 SNI</p>
+        <p class="hint">Nonaktifkan penggunaan konfigurasi ECH default; aktifkan *handshake* TLS terenkripsi ECH untuk menyembunyikan SNI.</p>
       </div>
-      <div class="field" style="margin-bottom:0"><label>自定义 ECH 域名</label>
+      <div class="field" style="margin-bottom:0"><label>Domain ECH Kustom</label>
         <input id="f-echHost" placeholder="cloudflare-ech.com">
-        <p class="hint">ECH 域名留空用默认</p>
+        <p class="hint">Biarkan kolom domain ECH kosong untuk menggunakan pengaturan default.</p>
       </div>
     </div>
     <div class="grid">
-      <div class="field" style="margin-bottom:0"><label>自定义 ECH DNS</label>
+      <div class="field" style="margin-bottom:0"><label>DNS ECH Kustom</label>
         <input id="f-echDns" placeholder="https://223.5.5.5/dns-query">
-        <p class="hint">关闭用客户端默认 DNS，开启自定义 DoH 获取 ECH 配置；地址留空用默认</p>
+        <p class="hint">Nonaktifkan penggunaan DNS default klien dan aktifkan DoH kustom untuk mendapatkan konfigurasi ECH; biarkan alamat kosong untuk menggunakan default.</p>
       </div>
       <div class="field" style="margin-bottom:0"></div>
     </div>
   </div>
   <div class="card">
-    <h2>协议开关</h2>
-    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableVless"><span class="sl"></span></label><span>启用 VLESS 协议（默认开启）</span></div>
-    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableTrojan"><span class="sl"></span></label><span>启用 Trojan 协议（已支持Clash Verge）</span></div>
-    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableXhttp"><span class="sl"></span></label><span>启用 xhttp 协议（须绑定域名并开启gRPC）</span></div>
-    <div class="field" style="margin-top:10px"><label>Trojan 密码（留空用 UUID）</label><input id="f-trojanPassword" placeholder="Trojan 密码"></div>
+    <h2>Pengalihan protokol</h2>
+    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableVless"><span class="sl"></span></label><span>Aktifkan protokol VLESS (diaktifkan secara default)</span></div>
+    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableTrojan"><span class="sl"></span></label><span>Aktifkan protokol Trojan (Clash Verge sudah didukung).</span></div>
+    <div class="proto-row"><label class="switch"><input type="checkbox" id="f-enableXhttp"><span class="sl"></span></label><span>Aktifkan protokol xhttp (domain harus terikat dan gRPC harus diaktifkan).</span></div>
+    <div class="field" style="margin-top:10px"><label>Kata sandi Trojan (biarkan kosong dan gunakan UUID)</label><input id="f-trojanPassword" placeholder="Kata sandi Trojan"></div>
   </div>
   <div class="card">
-    <h2>落地与出站</h2>
+    <h2>Mendarat dan meninggalkan stasiun</h2>
     <div class="grid">
-      <div class="field"><label>反代/落地 IP（留空使用内置地区反代，填写后优先，格式 host 或 host:port）</label><input id="f-proxyIP" placeholder="留空使用内置中继"></div>
-      <div class="field"><label>出站代理（可选，socks5:// / http:// 或 host:port）</label><input id="f-outboundProxy" placeholder="socks5://user:pass@1.2.3.4:1080"></div>
+      <div class="field"><label>Reverse Proxy/Exit IP (Biarkan kosong untuk menggunakan reverse proxy regional bawaan, jika ditentukan pengaturan ini yang akan digunakan format, host atau host:port)</label><input id="f-proxyIP" placeholder="留空使用内置中继"></div>
+      <div class="field"><label>Proksi keluar (opsional, socks5:// / http:// atau host:port)</label><input id="f-outboundProxy" placeholder="socks5://user:pass@1.2.3.4:1080"></div>
     </div>
-    <div class="field"><label>出站方式</label><select id="f-outboundMode">
-      <option value="">默认（优先代理，失败直连）</option>
-      <option value="no">直连优先（no）</option>
-      <option value="only">仅走代理（only）</option>
+    <div class="field"><label>Metode keluar</label><select id="f-outboundMode">
+      <option value="">Default (lebih memilih proxy, terhubung langsung jika gagal)</option>
+      <option value="no">Koneksi langsung lebih disukai (tidak)</option>
+      <option value="only">Khusus agen (only)</option>
     </select></div>
   </div>
 </div>
-<!-- 优选器 -->
+<!-- Selektor -->
 <div class="tab" id="tab-pick">
   <div class="card">
-    <h2>在线优选</h2>
+    <h2>Seleksi Online</h2>
     <div class="field">
-      <label>数据源</label>
+      <label>Sumber data</label>
       <select id="o-source">
-        <option value="wetest_v4">微测网 IPv4</option>
-        <option value="wetest_v6">微测网 IPv6</option>
-        <option value="bestcf">优选 IP 列表</option>
-        <option value="hostmonit">HostMonit 优选</option>
-        <option value="cidr">内置 CF 地址段</option>
-        <option value="custom">自定义 URL</option>
+        <option value="wetest_v4">Jaringan MicroTest IPv4</option>
+        <option value="wetest_v6">Jaringan MicroTest IPv6</option>
+        <option value="bestcf">Daftar IP Pilihan</option>
+        <option value="hostmonit">Pilihan Utama HostMonit</option>
+        <option value="cidr">Rentang alamat CF bawaan</option>
+        <option value="custom">URL Kustom</option>
       </select>
     </div>
-    <div class="field" id="o-customWrap" style="display:none"><label>自定义数据源 URL</label><input id="o-sourceURL" placeholder="https://.../ip.txt"></div>
+    <div class="field" id="o-customWrap" style="display:none"><label>URL Sumber Data Kustom</label><input id="o-sourceURL" placeholder="https://.../ip.txt"></div>
     <div class="grid3">
-      <div class="field" style="grid-column:span 3"><label>测速端口（本地→目标测速）</label>
+      <div class="field" style="grid-column:span 3"><label>Pengujian kecepatan port (lokal → pengujian kecepatan target)</label>
         <select id="o-portSel" onchange="onPortSel()">
           <optgroup label="HTTPS">
             <option value="443">443</option>
@@ -325,69 +325,69 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
             <option value="2086">2086</option>
             <option value="2095">2095</option>
           </optgroup>
-          <option value="custom">自定义…</option>
+          <option value="custom">Sesuaikan…</option>
         </select>
-        <input id="o-portCustom" style="display:none;margin-top:8px" placeholder="输入端口号">
+        <input id="o-portCustom" style="display:none;margin-top:8px" placeholder="Masukkan nomor port">
       </div>
-      <div class="field"><label>并发线程（1-50）</label><input id="o-threads" value="5"></div>
-      <div class="field"><label>候选数量</label><input id="o-count" value="20"></div>
-      <div class="field"><label>随机补足数量（0 关闭）</label><input id="o-fillCount" value="0"></div>
+      <div class="field"><label>Thread bersamaan (1-50)</label><input id="o-threads" value="5"></div>
+      <div class="field"><label>Jumlah kandidat</label><input id="o-count" value="20"></div>
+      <div class="field"><label>Jumlah yang diisi ulang secara acak (0)</label><input id="o-fillCount" value="0"></div>
     </div>
     <div class="row">
       <label class="switch"><input type="checkbox" id="o-useCidr" checked><span class="sl"></span></label>
-      <span style="font-size:13px">不足时补充随机 Cloudflare IP</span>
-      <button class="btn primary" onclick="runPick()">开始优选</button>
-      <button class="btn" onclick="addAllBest()">全部加入最优</button>
+      <span style="font-size:13px">Jika tidak mencukupi, tambahkan dengan IP Cloudflare acak</span>
+      <button class="btn primary" onclick="runPick()">Mulai pemilihan</button>
+      <button class="btn" onclick="addAllBest()">Tambahkan semuanya ke nilai optimal</button>
     </div>
     <div class="msg" id="oMsg"></div>
   </div>
   <div class="card">
-    <h2>测速结果</h2>
-    <table><thead><tr><th>IP:端口</th><th>延迟</th><th>状态</th><th>操作</th></tr></thead>
+    <h2>Hasil uji kecepatan</h2>
+    <table><thead><tr><th>IP:port</th><th>Menunda</th><th>negara</th><th>beroperasi</th></tr></thead>
     <tbody id="oTableBody"></tbody></table>
   </div>
   <div class="card">
-    <h2>优选节点</h2>
+    <h2>Node Pilihan</h2>
     <div class="field">
-      <label>订阅模式</label>
+      <label>Model berlangganan</label>
       <div class="row">
         <select id="o-subMode" onchange="onSubMode()" style="flex:1">
-          <option value="">关闭（使用面板默认）</option>
-          <option value="custom">自定义订阅（支持汇聚）</option>
-          <option value="random">随机优选模式（官方接口）</option>
+          <option value="">Mati (gunakan pengaturan default panel)</option>
+          <option value="custom">Langganan Kustom (Mendukung Agregasi)</option>
+          <option value="random">Mode Pemilihan Acak (API Resmi)</option>
         </select>
         <select id="o-subIncludeDefault" style="flex:1">
-          <option value="0">关闭（仅自定义节点）</option>
-          <option value="1">开启（追加内置及默认节点）</option>
+          <option value="0">Nonaktifkan (Hanya node kustom)</option>
+          <option value="1">Aktifkan (Tambahkan node bawaan dan default)</option>
         </select>
       </div>
-      <div class="hint">订阅模式：选择生成优选节点的方式；选择「自定义订阅（支持汇聚）」时，右侧开关控制是否同时下发内置优选池及默认 6 条地区源节点——关闭仅下发自定义节点，开启则默认地区与自定义节点合并下发</div>
+      <div class="hint">Mode Langganan: Pilih metode untuk menghasilkan node yang dioptimalkan. Saat "Langganan Kustom (Mendukung Agregasi)" dipilih, tombol pengalih di sebelah kanan menentukan apakah kumpulan optimasi bawaan dan enam node sumber regional default disertakan dalam hasil: jika dinonaktifkan, hanya node kustom yang disertakan; jika diaktifkan, node regional default digabungkan dengan node kustom untuk disertakan.</div>
     </div>
     <div class="field" id="sm-custom">
-      <label>优选节点（域名 / 优选API / IP，每行一个，IP 格式 IP:端口#名称）</label>
-      <textarea id="f-preferred" rows="5" placeholder="*.cloudflare.182682.xyz&#10;104.25.246.53:443#香港&#10;https://bestcf.pages.dev/random-region/HK/100.txt"></textarea>
-      <div class="hint">开启「自定义订阅」后生效；域名与优选 API 保存后自动解析下发；点击上方测速结果「加入优选」自动填入 IP；保存用右上「保存全部」按钮</div>
-      <button class="btn sm" style="margin-top:6px" onclick="fetchDomains()">拉取微测网优选域名</button>
+      <label>Node pilihan (nama domain / API pilihan / IP, satu per baris, format IP: IP:port#nama)</label>
+      <textarea id="f-preferred" rows="5" placeholder="*.cloudflare.182682.xyz&#10;104.25.246.53:443#Hongkong&#10;https://bestcf.pages.dev/random-region/HK/100.txt"></textarea>
+      <div class="hint">Ini akan berlaku setelah mengaktifkan "Langganan Kustom"; nama domain dan API pilihan akan secara otomatis diselesaikan dan didistribusikan setelah disimpan; mengklik "Tambahkan ke Pilihan" pada hasil uji kecepatan di atas akan secara otomatis mengisi alamat IP; simpan menggunakan tombol "Simpan Semua" di pojok kanan atas.</div>
+      <button class="btn sm" style="margin-top:6px" onclick="fetchDomains()">Ambil nama domain pilihan MicroTest</button>
     </div>
     <div class="field" id="sm-random" style="display:none">
-      <label>随机优选数量（1-99）</label>
+      <label>Jumlah Pilihan Acak (1–99)</label>
       <input id="o-subRandomCount" value="16" type="number" min="1" max="99">
-      <div class="hint">从 Cloudflare 地址段随机生成指定数量的优选节点下发（不经域名解析）</div>
+      <div class="hint">Menghasilkan dan mendistribusikan secara acak sejumlah node yang dioptimalkan dari rentang alamat Cloudflare (dengan melewati resolusi nama domain)</div>
     </div>
   </div>
 </div>
-<!-- 关于项目 -->
+<!-- Tentang Proyek -->
 <div class="tab" id="tab-help">
   <div class="card">
-    <h2>相关链接</h2>
-    <p style="color:var(--dim);font-size:13px">YouTube @数字派：<a href="https://www.youtube.com/@PAI_CN" target="_blank" rel="noopener">https://www.youtube.com/@PAI_CN</a></p>
-    <p style="color:var(--dim);font-size:13px">Telegram 交流群：<a href="https://t.me/SZ_PAI" target="_blank" rel="noopener">https://t.me/SZ_PAI</a></p>
+    <h2>Tautan Terkait</h2>
+    <p style="color:var(--dim);font-size:13px">YouTube mrkings：<a href="https://www.youtube.com/@mrkings" target="_blank" rel="noopener">https://www.youtube.com/@mrkings</a></p>
+    <p style="color:var(--dim);font-size:13px">Telegram club gratis：<a href="https://t.me/club_gratis" target="_blank" rel="noopener">https://t.me/club_gratis</a></p>
   </div>
   <div class="card">
-    <h2>特别鸣谢</h2>
-    <p style="color:var(--dim);font-size:13px">本面板为全新独立编写，功能与接口参考以下开源项目：</p>
+    <h2>Ucapan Terima Kasih Khusus</h2>
+    <p style="color:var(--dim);font-size:13px">Panel ini dibuat dari nol, fitur dan antarmukanya didasarkan pada proyek-proyek sumber terbuka berikut：</p>
     <table>
-      <tr><th>参考仓库</th><th>地址</th></tr>
+      <tr><th>Repositori referensi</th><th>地址</th></tr>
       <tr><td>cmliu/edgetunnel</td><td><a href="https://github.com/cmliu/edgetunnel" target="_blank" rel="noopener">https://github.com/cmliu/edgetunnel</a></td></tr>
       <tr><td>zizifn/edgetunnel</td><td><a href="https://github.com/zizifn/edgetunnel" target="_blank" rel="noopener">https://github.com/zizifn/edgetunnel</a></td></tr>
       <tr><td>6Kmfi6HP/EDtunnel</td><td><a href="https://github.com/6Kmfi6HP/EDtunnel" target="_blank" rel="noopener">https://github.com/6Kmfi6HP/EDtunnel</a></td></tr>
