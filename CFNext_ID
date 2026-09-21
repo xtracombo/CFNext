@@ -387,7 +387,7 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
     <h2>Ucapan Terima Kasih Khusus</h2>
     <p style="color:var(--dim);font-size:13px">Panel ini dibuat dari nol, fitur dan antarmukanya didasarkan pada proyek-proyek sumber terbuka berikut：</p>
     <table>
-      <tr><th>Repositori referensi</th><th>地址</th></tr>
+      <tr><th>Repositori referensi</th><th>alamat</th></tr>
       <tr><td>cmliu/edgetunnel</td><td><a href="https://github.com/cmliu/edgetunnel" target="_blank" rel="noopener">https://github.com/cmliu/edgetunnel</a></td></tr>
       <tr><td>zizifn/edgetunnel</td><td><a href="https://github.com/zizifn/edgetunnel" target="_blank" rel="noopener">https://github.com/zizifn/edgetunnel</a></td></tr>
       <tr><td>6Kmfi6HP/EDtunnel</td><td><a href="https://github.com/6Kmfi6HP/EDtunnel" target="_blank" rel="noopener">https://github.com/6Kmfi6HP/EDtunnel</a></td></tr>
@@ -395,23 +395,23 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
     </table>
   </div>
   <div class="card">
-    <h2>调用 API 接口</h2>
+    <h2>Panggil endpoint API</h2>
     <table>
-      <tr><th colspan="2" style="text-align:left">优选测速数据源</th></tr>
-      <tr><td>微测网 IPv4 优选</td><td>https://www.wetest.vip/page/cloudflare/address_v4.html</td></tr>
-      <tr><td>微测网 IPv6 优选</td><td>https://www.wetest.vip/page/cloudflare/address_v6.html</td></tr>
-      <tr><td>微测网 优选域名</td><td>https://www.wetest.vip/page/cloudflare/cname.html</td></tr>
-      <tr><td>优选 IP 列表</td><td>https://cf.090227.xyz/ip.164746.xyz</td></tr>
-      <tr><td>HostMonit 优选</td><td>https://stock.hostmonit.com/CloudFlareYes</td></tr>
-      <tr><td>优选 API（bestcf 随机地区）</td><td>https://bestcf.pages.dev/random-region/{HK|TW|JP|SG|US|KR}/100.txt</td></tr>
-      <tr><td>节点测速地址</td><td>https://www.gstatic.com/generate_204 / https://www.google.com/generate_204</td></tr>
-      <tr><th colspan="2" style="text-align:left">DoH 解析（UDP→DoH 转换 / 节点解析）</th></tr>
-      <tr><td>DoH 解析（腾讯）</td><td>https://doh.pub/dns-query</td></tr>
-      <tr><td>DoH 解析（阿里）</td><td>https://dns.alidns.com/resolve（/dns-query）</td></tr>
-      <tr><td>DoH 解析（Cloudflare）</td><td>https://1.1.1.1/dns-query / https://cloudflare-dns.com/dns-query</td></tr>
-      <tr><td>DoH 解析（Google）</td><td>https://8.8.8.8/dns-query / https://dns.google/dns-query</td></tr>
-      <tr><td>公共 DNS（引导）</td><td>https://223.5.5.5/dns-query</td></tr>
-      <tr><th colspan="2" style="text-align:left">Clash 规则集源（订阅模板）</th></tr>
+      <tr><th colspan="2" style="text-align:left">Sumber Data Uji Kecepatan yang Dioptimalkan</th></tr>
+      <tr><td>Jaringan MicroTest IPv4</td><td>https://www.wetest.vip/page/cloudflare/address_v4.html</td></tr>
+      <tr><td>Jaringan MicroTest IPv6</td><td>https://www.wetest.vip/page/cloudflare/address_v6.html</td></tr>
+      <tr><td>Domain Pilihan Jaringan MicroTest</td><td>https://www.wetest.vip/page/cloudflare/cname.html</td></tr>
+      <tr><td>Daftar IP Pilihan</td><td>https://cf.090227.xyz/ip.164746.xyz</td></tr>
+      <tr><td>HostMonit Pilihan Premium</td><td>https://stock.hostmonit.com/CloudFlareYes</td></tr>
+      <tr><td>API yang dioptimalkan (bestcf, wilayah acak)</td><td>https://bestcf.pages.dev/random-region/{HK|TW|JP|SG|US|KR}/100.txt</td></tr>
+      <tr><td>URL Uji Kecepatan Node</td><td>https://www.gstatic.com/generate_204 / https://www.google.com/generate_204</td></tr>
+      <tr><th colspan="2" style="text-align:left">Resolusi DoH (konversi UDP→DoH / resolusi node)</th></tr>
+      <tr><td>Analisis DoH (Tencent)</td><td>https://doh.pub/dns-query</td></tr>
+      <tr><td>Analisis DoH (Alibaba)</td><td>https://dns.alidns.com/resolve（/dns-query）</td></tr>
+      <tr><td>Analisis DoH（Cloudflare）</td><td>https://1.1.1.1/dns-query / https://cloudflare-dns.com/dns-query</td></tr>
+      <tr><td>Analisis DoH（Google）</td><td>https://8.8.8.8/dns-query / https://dns.google/dns-query</td></tr>
+      <tr><td>DNS publik (bootstrap)</td><td>https://223.5.5.5/dns-query</td></tr>
+      <tr><th colspan="2" style="text-align:left">Sumber Aturan Clash (Templat Langganan)</th></tr>
       <tr><td>666OS Mihomo 规则集</td><td>https://github.com/666OS/rules/raw/release/mihomo/</td></tr>
       <tr><td>DustinWin 媒体规则集</td><td>https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/</td></tr>
       <tr><td>AWAvenue 广告拦截规则</td><td>https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/</td></tr>
