@@ -111,7 +111,7 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
 <div class="tab on" id="tab-overview">
   <div class="card">
     <h2>Panduan Singkat</h2>
-    <div id="wdwarn" style="display:none;background:rgba(242,85,73,.12);border:1px solid rgba(242,85,73,.4);color:#ff9c98;border-radius:8px;padding:8px 12px;font-size:12px;margin-bottom:10px">检测到当前通过 *.workers.dev 访问。该域名大陆直连常被阻断，下发的节点 SNI 取自访问域名，会导致客户端真连接延时全部 -1。请到 Cloudflare Workers 绑定自定义域名后，用自定义域名访问面板与订阅。</div>
+    <div id="wdwarn" style="display:none;background:rgba(242,85,73,.12);border:1px solid rgba(242,85,73,.4);color:#ff9c98;border-radius:8px;padding:8px 12px;font-size:12px;margin-bottom:10px">Saat ini akses dilakukan melalui *.workers.dev. Koneksi langsung ke domain ini sering diblokir, dan SNI dari node terdistribusi diambil dari domain akses ini, menyebabkan latensi koneksi sebenarnya di sisi klien semuanya bernilai -1. Harap ikat domain khusus di Cloudflare Workers dan kemudian akses dasbor dan langganan menggunakan domain khusus tersebut.</div>
     <div class="grid3">
       <div class="card" style="margin:0">
         <h2>1. Tidak memerlukan konfigurasi (khusus untuk pemula)</h2>
@@ -412,20 +412,20 @@ code.hl{background:var(--card2);padding:2px 6px;border-radius:5px;font-family:ui
       <tr><td>Analisis DoH（Google）</td><td>https://8.8.8.8/dns-query / https://dns.google/dns-query</td></tr>
       <tr><td>DNS publik (bootstrap)</td><td>https://223.5.5.5/dns-query</td></tr>
       <tr><th colspan="2" style="text-align:left">Sumber Aturan Clash (Templat Langganan)</th></tr>
-      <tr><td>666OS Mihomo 规则集</td><td>https://github.com/666OS/rules/raw/release/mihomo/</td></tr>
-      <tr><td>DustinWin 媒体规则集</td><td>https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/</td></tr>
-      <tr><td>AWAvenue 广告拦截规则</td><td>https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/</td></tr>
-      <tr><td>GitHub 分流规则（kelee one）</td><td>https://rule.kelee.one/Clash/GitHub.yaml</td></tr>
-      <tr><th colspan="2" style="text-align:left">面板与资源</th></tr>
-      <tr><td>zashboard 管理面板</td><td>https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip</td></tr>
-      <tr><td>Qure 图标集</td><td>https://github.com/Koolson/Qure/</td></tr>
-      <tr><td>二维码生成库</td><td>https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js</td></tr>
+      <tr><td>6660S Kumpulan Aturan Mihomo</td><td>https://github.com/666OS/rules/raw/release/mihomo/</td></tr>
+      <tr><td>DustinWin Kumpulan Aturan Media</td><td>https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/</td></tr>
+      <tr><td>AWAvenue Aturan pemblokiran iklan</td><td>https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/</td></tr>
+      <tr><td>GitHub Aturan pengalihan lalu lintas（kelee one）</td><td>https://rule.kelee.one/Clash/GitHub.yaml</td></tr>
+      <tr><th colspan="2" style="text-align:left">Panel dan Sumber Daya</th></tr>
+      <tr><td>zashboard Panel Manajemen</td><td>https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip</td></tr>
+      <tr><td>Qure Kumpulan Ikon</td><td>https://github.com/Koolson/Qure/</td></tr>
+      <tr><td>Pustaka pembuatan kode QR</td><td>https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js</td></tr>
     </table>
   </div>
 </div>
 </div>
-<div class="fbar"><button class="btn danger" id="resetBtn" onclick="resetAll()">重置</button>
-<button class="btn primary" id="saveBtn" onclick="saveAll()">保存全部</button></div>
+<div class="fbar"><button class="btn danger" id="resetBtn" onclick="resetAll()">Mengatur ulang</button>
+<button class="btn primary" id="saveBtn" onclick="saveAll()">Simpan semua</button></div>
 <div class="toast" id="toast"></div>
 <script>
 var APIPATH = location.pathname;
@@ -449,14 +449,14 @@ function showMsg(id, t, ty){
 }
 function copyText(t){
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(function(){ toast('已复制', 'ok'); }, function(){ fallbackCopy(t); });
+    navigator.clipboard.writeText(t).then(function(){ toast('Disalin', 'ok'); }, function(){ fallbackCopy(t); });
   } else fallbackCopy(t);
 }
 function fallbackCopy(t){
   var ta = document.createElement('textarea');
   ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); toast('已复制', 'ok'); } catch(e) { toast('复制失败，请手动复制', 'err'); }
+  try { document.execCommand('copy'); toast('Disalin', 'ok'); } catch(e) { toast('Penyalinan gagal，Silakan salin secara manual', 'err'); }
   document.body.removeChild(ta);
 }
 function copySub(){ copyText($('subUrl').value); }
@@ -496,38 +496,38 @@ function loadAll(){
   api('config').then(function(r){
     if(r && r.ok){ CFG = r.data; fillForm(); renderPreferred(); renderHeader(); makeSub(false); }
     else if(r && r.status === 403){ location.href = '/login?next=' + encodeURIComponent(APIPATH); }
-    else { toast('无法连接服务器', 'err'); }
-  }).catch(function(){ toast('无法连接服务器', 'err'); });
+    else { toast('Tidak dapat menjangkau server', 'err'); }
+  }).catch(function(){ toast('Tidak dapat menjangkau server', 'err'); });
 }
 function renderHeader(){
   if(!CFG) return;
-  $('hdrInfo').textContent = '当前版本：' + (CFG.version || '');
+  $('hdrInfo').textContent = 'Versi saat ini：' + (CFG.version || '');
 }
-// 右上角版本号按钮：点击检测 GitHub 仓库（PAICNI/CFNext）最新版本
+// Tombol nomor versi (kanan atas): Klik untuk melihat repositori GitHub.（PAICNI/CFNext）Versi terbaru
 function checkUpdate(){
   var btn = $('hdrInfo');
   if(btn.getAttribute('data-checking') === '1') return;
   btn.setAttribute('data-checking', '1');
   var old = btn.textContent;
-  btn.textContent = '检测中…';
+  btn.textContent = 'Mendeteksi…';
   api('check-update').then(function(r){
     btn.removeAttribute('data-checking');
-    if(!r || !r.ok){ toast((r && r.msg) || '检测失败', 'err'); btn.textContent = old; return; }
+    if(!r || !r.ok){ toast((r && r.msg) || 'Deteksi gagal', 'err'); btn.textContent = old; return; }
     if(r.changed){
       copyCode(r.code || '');
-      toast('检测到新版本，已复制代码到剪贴板', 'ok');
-      btn.textContent = '检测到新版本 ' + (r.latest || '');
+      toast('Versi baru terdeteksi，Kode disalin ke papan klip', 'ok');
+      btn.textContent = 'Versi baru terdeteksi ' + (r.latest || '');
     } else {
-      toast('当前为最新版本（' + (r.current || '') + '）', 'ok');
+      toast('Ini adalah versi terbaru（' + (r.current || '') + '）', 'ok');
       btn.textContent = old;
     }
   }).catch(function(){
     btn.removeAttribute('data-checking');
-    toast('检测失败', 'err');
+    toast('Deteksi gagal', 'err');
     btn.textContent = old;
   });
 }
-// 复制远端最新代码到剪贴板（提示由 checkUpdate 统一给出，这里不再重复弹"已复制"）
+// Salin kode jarak jauh terbaru ke clipboard (notifikasi ditangani secara terpusat oleh checkUpdate, jadi tidak ada pemberitahuan Disalin yang ditampilkan di sini).
 function copyCode(t){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(t).then(function(){}, function(){ fallbackCopy(t); });
@@ -535,10 +535,10 @@ function copyCode(t){
 }
 function renderStatus(d){
   var h = '';
-  h += '<div class="kv"><span class="k">Worker 地址</span><span class="v">' + (d.host || '') + '</span></div>';
-  h += '<div class="kv"><span class="k">面板路径</span><span class="v">' + (d.path || '') + '</span></div>';
-  h += '<div class="kv"><span class="k">面板入口</span><span class="v">' + location.origin + '/' + (d.path || '') + '</span></div>';
-  h += '<div class="kv"><span class="k">接入节点</span><span class="v">' + (d.host ? '正常' : '未知') + '</span></div>';
+  h += '<div class="kv"><span class="k"> Alamat Worker</span><span class="v">' + (d.host || '') + '</span></div>';
+  h += '<div class="kv"><span class="k">Jalur panel</span><span class="v">' + (d.path || '') + '</span></div>';
+  h += '<div class="kv"><span class="k">Akses Dasbor</span><span class="v">' + location.origin + '/' + (d.path || '') + '</span></div>';
+  h += '<div class="kv"><span class="k">Simpul akses</span><span class="v">' + (d.host ? 'normal' : 'tidak dikenal') + '</span></div>';
   $('statusBox').innerHTML = h;
 }
 function onNodeLimit(){
@@ -585,10 +585,10 @@ function fillForm(){
   var ipType = fl.ipType || ['IPv4', 'IPv6'];
   $('fl-ipv4').checked = ipType.indexOf('IPv4') >= 0;
   $('fl-ipv6').checked = ipType.indexOf('IPv6') >= 0;
-  var isp = fl.isp || ['移动', '联通', '电信'];
-  $('fl-isp-mobile').checked = isp.indexOf('移动') >= 0;
-  $('fl-isp-unicom').checked = isp.indexOf('联通') >= 0;
-  $('fl-isp-telecom').checked = isp.indexOf('电信') >= 0;
+  var isp = fl.isp || ['bergerak', 'Unicom Tiongkok', 'telekomunikasi'];
+  $('fl-isp-mobile').checked = isp.indexOf('bergerak') >= 0;
+  $('fl-isp-unicom').checked = isp.indexOf('Unicom Tiongkok') >= 0;
+  $('fl-isp-telecom').checked = isp.indexOf('telekomunikasi') >= 0;
 }
 function onSubMode(){
   var m = $('o-subMode') ? $('o-subMode').value : '';
@@ -670,33 +670,33 @@ function collectForm(){
     filter: {
       region: $('fl-region').value,
       ipType: (function(){ var a = []; if ($('fl-ipv4').checked) a.push('IPv4'); if ($('fl-ipv6').checked) a.push('IPv6'); return a; })(),
-      isp: (function(){ var a = []; if ($('fl-isp-mobile').checked) a.push('移动'); if ($('fl-isp-unicom').checked) a.push('联通'); if ($('fl-isp-telecom').checked) a.push('电信'); return a; })()
+      isp: (function(){ var a = []; if ($('fl-isp-mobile').checked) a.push('bergerak'); if ($('fl-isp-unicom').checked) a.push('Unicom Tiongkok'); if ($('fl-isp-telecom').checked) a.push('telekomunikasi'); return a; })()
     }
   };
 }
 function saveAll(){
-  if(!CFG){ toast('配置尚未加载', 'err'); return; }
+  if(!CFG){ toast('Konfigurasi belum dimuat', 'err'); return; }
   var body = collectForm();
   $('saveBtn').disabled = true;
   api('config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
     .then(function(r){
-      if(r && r.ok){ CFG = r.data; renderPreferred(); renderHeader(); $('saveBtn').classList.remove('dirty'); toast('已保存并生效', 'ok'); }
-      else toast((r && r.msg) || '保存失败', 'err');
+      if(r && r.ok){ CFG = r.data; renderPreferred(); renderHeader(); $('saveBtn').classList.remove('dirty'); toast('Terselamatkan dan efektif', 'ok'); }
+      else toast((r && r.msg) || 'Penyimpanan gagal', 'err');
     })
-    .catch(function(){ toast('保存失败：无法连接服务器', 'err'); })
+    .catch(function(){ toast('Penyimpanan gagal：Tidak dapat menjangkau server', 'err'); })
     .then(function(){ $('saveBtn').disabled = false; });
 }
-// 重置：清空 KV 中全部数据（面板配置 + 已下发节点记录），面板还原为最开始的部署状态
+// Reset: Menghapus semua data di penyimpanan KV (konfigurasi panel + catatan node yang telah di-deploy) dan mengembalikan panel ke kondisi awal saat pertama kali di-deploy.
 function resetAll(){
-  if(!confirm('确定重置？将清空 KV 中全部面板配置与节点记录，面板还原为最开始的部署状态。此操作不可恢复！')) return;
+  if(!confirm('Konfirmasi pengaturan ulang？Tindakan ini akan menghapus semua konfigurasi panel dan catatan node dari penyimpanan KV, serta mengembalikan panel ke kondisi awal saat pertama kali diterapkan. Operasi ini tidak dapat dibatalkan！')) return;
   var btn = $('resetBtn');
   btn.disabled = true;
   api('reset', { method: 'POST' })
     .then(function(r){
-      if(r && r.ok){ toast(r.msg || '已重置', 'ok'); setTimeout(function(){ location.reload(); }, 900); }
-      else toast((r && r.msg) || '重置失败', 'err');
+      if(r && r.ok){ toast(r.msg || 'Mengatur ulang', 'ok'); setTimeout(function(){ location.reload(); }, 900); }
+      else toast((r && r.msg) || 'Reset gagal', 'err');
     })
-    .catch(function(){ toast('重置失败：无法连接服务器', 'err'); })
+    .catch(function(){ toast('Reset gagal：Tidak dapat menjangkau server', 'err'); })
     .then(function(){ btn.disabled = false; });
 }
 function renderPreferred(){
@@ -709,9 +709,9 @@ function renderPreferred(){
   });
   $('f-preferred').value = lines.join('\n');
 }
-// ---- 优选器 ----
+// ---- Selektor ----
 var LAST = [];
-// 本地（浏览器）→ 目标 IP 的延迟探测：HTTPS 端口用 https，HTTP 端口用 http（被混合内容阻止时回退 https）
+// Probe latensi dari lokal (browser) ke IP target: gunakan https untuk port HTTPS dan http untuk port HTTP (beralih ke https jika diblokir oleh *mixed content*).
 function pingIp(ip, port, timeout){
   var t0 = Date.now();
   var addr = ip.indexOf(':') >= 0 ? '[' + ip + ']' : ip;
@@ -723,7 +723,7 @@ function pingIp(ip, port, timeout){
     .catch(function(){
       clearTimeout(timer);
       var ms = Date.now() - t0;
-      if (proto === 'http' && ms < 100) return pingHttps(ip, port, timeout);   // https 面板下 http 被混合内容阻止，回退 https 探测
+      if (proto === 'http' && ms < 100) return pingHttps(ip, port, timeout);   // Konten HTTP diblokir karena adanya konten campuran (mixed content) dalam HTTPS, beralih kembali ke pemeriksaan (probing) HTTPS.
       return { ok: ms < timeout, latency: ms };
     });
 }
@@ -754,31 +754,31 @@ function localTest(cands, threads, timeout){
 }
 function runPick(){
   var o = collectForm().optimizer;
-  showMsg('oMsg', '正在拉取候选 IP…', 'info');
+  showMsg('oMsg', 'Mengambil kandidat IP…', 'info');
   api('candidates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(o) })
     .then(function(r){
-      if(!r || !r.ok){ showMsg('oMsg', (r && r.msg) || '拉取失败', 'err'); return; }
+      if(!r || !r.ok){ showMsg('oMsg', (r && r.msg) || 'Penarikan gagal', 'err'); return; }
       var cands = r.data || [];
-      if(!cands.length){ showMsg('oMsg', (r && r.msg) || '没有可测的 IP，请换一个数据源', 'err'); return; }
+      if(!cands.length){ showMsg('oMsg', (r && r.msg) || 'Tidak ada IP yang dapat diuji, silakan beralih ke sumber data lain', 'err'); return; }
       var st = r.stats || {};
       var parts = [];
-      if (st.preset) parts.push('预设源 ' + st.preset + ' 条');
-      if (st.presetErr) parts.push('预设源失败(' + st.presetErr + ')');
-      if (st.custom) parts.push('自定义源 ' + st.custom + ' 条');
-      if (st.customErr) parts.push('自定义源失败(' + st.customErr + ')');
-      if (st.cidr) parts.push('CF补足 ' + st.cidr + ' 条');
-      showMsg('oMsg', '拉取 ' + cands.length + ' 条（' + (parts.join('，') || '无') + '），本地测速中…', 'info');
+      if (st.preset) parts.push('Sumber preset ' + st.preset + ' mengupas');
+      if (st.presetErr) parts.push('Kegagalan sumber preset(' + st.presetErr + ')');
+      if (st.custom) parts.push('Sumber Kustom ' + st.custom + ' mengupas');
+      if (st.customErr) parts.push('Gagal menambahkan sumber kustom(' + st.customErr + ')');
+      if (st.cidr) parts.push('Pengisian ulang CF ' + st.cidr + ' mengupas');
+      showMsg('oMsg', 'Menarik ' + cands.length + ' mengupas（' + (parts.join('，') || 'tidak ada') + '），Menjalankan uji kecepatan lokal…', 'info');
       localTest(cands, o.threads || 5, 3000).then(function(results){
         results.sort(function(a,b){ return (a.latency < 0 ? 1e9 : a.latency) - (b.latency < 0 ? 1e9 : b.latency); });
         renderResults(results);
         var okc = results.filter(function(x){ return x.ok; }).length;
-        showMsg('oMsg', '测速完成：' + okc + '/' + results.length + ' 可用（本地→目标）', okc ? 'ok' : 'err');
+        showMsg('oMsg', 'Tes kecepatan selesai：' + okc + '/' + results.length + ' Tersedia (Lokal → Target)', okc ? 'ok' : 'err');
       });
     })
-    .catch(function(){ showMsg('oMsg', '拉取失败：无法连接服务器', 'err'); });
+    .catch(function(){ showMsg('oMsg', 'Penarikan gagal：Tidak dapat menjangkau server', 'err'); });
 }
 function renderResults(list){
-  // 显示层兜底：同一 IP 只显示一条（列表已按延迟排序，保留最先=最优的一条）
+  // Cadangan lapisan tampilan: Hanya satu entri yang ditampilkan per alamat IP (daftar diurutkan berdasarkan latensi, dengan mempertahankan entri pertama—yang dengan demikian merupakan entri optimal).
   var seen = {};
   var dedup = [];
   (list || []).forEach(function(r){
@@ -792,9 +792,9 @@ function renderResults(list){
   LAST.forEach(function(r, i){
     var tr = document.createElement('tr');
     var ok = r.ok;
-    var lag = ok ? (r.latency + 'ms') : '超时';
-    var badge = '<span class="badge ' + (ok ? 'g' : 'r') + '">' + (ok ? '可用' : '超时') + '</span>';
-    var btn = ok ? '<button class="btn sm primary" onclick="useIp(' + i + ')">加入优选</button>' : '';
+    var lag = ok ? (r.latency + 'ms') : 'jeda';
+    var badge = '<span class="badge ' + (ok ? 'g' : 'r') + '">' + (ok ? 'Tersedia' : 'jeda') + '</span>';
+    var btn = ok ? '<button class="btn sm primary" onclick="useIp(' + i + ')">Bergabunglah dengan Pilihan Premium</button>' : '';
     tr.innerHTML = '<td class="ip">' + r.ip + ':' + r.port + '</td><td>' + lag + '</td><td>' + badge + '</td><td>' + btn + '</td>';
     tb.appendChild(tr);
   });
@@ -804,17 +804,17 @@ function useIp(i){
   if(!r) return;
   var ta = $('f-preferred');
   var line = r.ip + ':' + r.port + (r.name ? ('#' + r.name) : '');
-  // 同一 IP 已在优选列表中则不再重复加入
+  // Jika IP yang sama sudah ada dalam daftar yang dioptimalkan, IP tersebut tidak akan ditambahkan lagi.
   var exists = false;
   String(ta.value || '').split(/[\n,;]+/).forEach(function(s){
     var p = parseIps(s);
     if (p.length && p[0].ip === r.ip) exists = true;
   });
-  if (exists) { toast('该 IP 已在优选列表中', 'warn'); return; }
+  if (exists) { toast('IP ini sudah ada dalam daftar preferensi', 'warn'); return; }
   var s = ta.value.trim();
   ta.value = s ? (s + '\n' + line) : line;
   markDirty();
-  toast('已加入优选列表，点击「保存全部」下发', 'ok');
+  toast('Ditambahkan ke daftar pilihan, klik Simpan Semua untuk mengirim', 'ok');
 }
 function addAllBest(){
   var n = parseInt($('o-count').value) || 20;
@@ -825,20 +825,20 @@ function addAllBest(){
     seen[r.ip] = 1;
     list.push(r);
   });
-  if(!list.length){ toast('没有可用结果', 'err'); return; }
+  if(!list.length){ toast('Tidak ada hasil yang tersedia', 'err'); return; }
   var arr = [];
-  list.forEach(function(r, i){ arr.push(r.ip + ':' + r.port + '#优选' + (i + 1)); });
+  list.forEach(function(r, i){ arr.push(r.ip + ':' + r.port + '#PilihanUtama' + (i + 1)); });
   $('f-preferred').value = arr.join('\n');
   markDirty();
-  toast('已加入最快的 ' + list.length + ' 个优选 IP，点击「保存全部」下发', 'ok');
+  toast('Menambahkan yang tercepat ' + list.length + ' Pilih IP yang optimal dan klik Save All untuk menerapkannya', 'ok');
 }
 function fetchDomains(){
   api('domains').then(function(r){
     if(r && r.ok && r.data && r.data.length){ $('f-preferred').value = r.data.join('\n'); markDirty(); toast('已拉取优选域名', 'ok'); }
-    else toast((r && r.msg) || '拉取失败', 'err');
-  }).catch(function(){ toast('拉取失败：无法连接服务器', 'err'); });
+    else toast((r && r.msg) || 'Penarikan gagal', 'err');
+  }).catch(function(){ toast('Pull gagal: Tidak dapat terhubung ke server', 'err'); });
 }
-// ---- 订阅 ----
+// ---- langganan ----
 function subUrlOf(fmt){
   var u = location.origin + APIPATH + '/sub';
   return fmt ? (u + '/' + fmt) : u;
@@ -853,7 +853,7 @@ function showQRCode(){
   var url = $('subUrl').value || subUrlOf('');
   var w = $('qrWrap');
   w.style.display = 'block';
-  if(typeof qrcode === 'undefined'){ w.innerHTML = '<div class="hint">二维码库加载失败，请直接复制链接</div>'; return; }
+  if(typeof qrcode === 'undefined'){ w.innerHTML = '<div class="hint">Gagal memuat pustaka kode QR, silakan salin tautan secara langsung</div>'; return; }
   var q = qrcode(0, 'M');
   q.addData(url);
   q.make();
@@ -868,7 +868,7 @@ function downloadSub(){
   a.click();
   a.remove();
 }
-// 日间/夜间模式切换
+// Sakelar Mode Siang/Malam
 function toggleTheme() {
   var cur = document.documentElement.getAttribute('data-theme') || 'dark';
   var next = cur === 'dark' ? 'light' : 'dark';
@@ -885,4 +885,4 @@ function toggleTheme() {
 loadAll();
 </script>
 </body>
-</html>`,loginHTML='<!DOCTYPE\x20html>\x0a<html\x20lang=\x22zh-CN\x22>\x0a<head>\x0a<meta\x20charset=\x22utf-8\x22>\x0a<meta\x20name=\x22viewport\x22\x20content=\x22width=device-width,\x20initial-scale=1\x22>\x0a<title>CFNext\x20·\x20登录</title>\x0a<style>\x0abody{background:#0d1117;color:#e6edf3;font-family:\x22PingFang\x20SC\x22,\x22Microsoft\x20YaHei\x22,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}\x0a.box{background:#161b22;border:1px\x20solid\x20#2d333b;border-radius:12px;padding:28px;width:320px}\x0ah1{font-size:18px;margin-bottom:6px}\x0ap{color:#8b949e;font-size:13px;margin:0\x200\x2018px}\x0ainput{width:100%;background:#1c2230;border:1px\x20solid\x20#2d333b;color:#e6edf3;border-radius:8px;padding:10px\x2012px;font-size:14px;outline:none;box-sizing:border-box;margin-bottom:12px}\x0ainput:focus{border-color:#4f9dff}\x0abutton{width:100%;background:#4f9dff;border:none;color:#fff;border-radius:8px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}\x0a.msg{color:#f85149;font-size:13px;margin-bottom:10px;display:none}\x0a</style>\x0a</head>\x0a<body>\x0a<div\x20class=\x22box\x22>\x0a\x20\x20<h1>CFNext</h1>\x0a\x20\x20<p>请输入管理密码</p>\x0a\x20\x20<div\x20class=\x22msg\x22\x20id=\x22msg\x22>密码错误</div>\x0a\x20\x20<form\x20id=\x22form\x22>\x0a\x20\x20\x20\x20<input\x20type=\x22password\x22\x20id=\x22pwd\x22\x20placeholder=\x22管理密码\x22\x20autofocus>\x0a\x20\x20\x20\x20<button\x20type=\x22submit\x22>登录</button>\x0a\x20\x20</form>\x0a</div>\x0a<script>\x0avar\x20next\x20=\x20new\x20URLSearchParams(location.search).get(\x27next\x27)\x20||\x20\x27/\x27;\x0adocument.getElementById(\x27form\x27).addEventListener(\x27submit\x27,\x20function(e){\x0a\x20\x20e.preventDefault();\x0a\x20\x20var\x20pwd\x20=\x20document.getElementById(\x27pwd\x27).value;\x0a\x20\x20fetch(\x27/login\x27,\x20{\x20method:\x20\x27POST\x27,\x20headers:\x20{\x20\x27Content-Type\x27:\x20\x27application/x-www-form-urlencoded\x27\x20},\x20body:\x20\x27password=\x27\x20+\x20encodeURIComponent(pwd)\x20+\x20\x27&next=\x27\x20+\x20encodeURIComponent(next)\x20})\x0a\x20\x20\x20\x20.then(function(r){\x20return\x20r.json();\x20})\x0a\x20\x20\x20\x20.then(function(r){\x0a\x20\x20\x20\x20\x20\x20if(r\x20&&\x20r.ok){\x20location.href\x20=\x20r.next\x20||\x20\x27/\x27;\x20}\x0a\x20\x20\x20\x20\x20\x20else\x20{\x20document.getElementById(\x27msg\x27).style.display\x20=\x20\x27block\x27;\x20}\x0a\x20\x20\x20\x20})\x0a\x20\x20\x20\x20.catch(function(){\x20document.getElementById(\x27msg\x27).textContent\x20=\x20\x27网络错误\x27;\x20document.getElementById(\x27msg\x27).style.display\x20=\x20\x27block\x27;\x20});\x0a});\x0a</script>\x0a</body>\x0a</html>';function isBrowserUA(_0x490aa8){const _0x45664c=_0x1af6f6;return(_0x490aa8||'')['toLowerCase']()[_0x45664c(0x325)]('mozilla');}async function requireAuth(_0x43e7c8,_0x2838b3){const _0x494835=_0x1af6f6;if(!_0x2838b3[_0x494835(0x2c4)])return!![];const _0x1df5ff=_0x43e7c8[_0x494835(0x269)][_0x494835(0x13d)]('Cookie')||'',_0xa704e5=_0x1df5ff[_0x494835(0x1d8)](/(?:^|;\s*)luma_auth=([^;]+)/);return!!(_0xa704e5&&_0xa704e5[0x1]===md5hex(String(_0x2838b3[_0x494835(0x2c4)])));}async function handleRequest(_0x46f439,_0x569836){const _0x369b71=_0x1af6f6,_0x4677db=new URL(_0x46f439[_0x369b71(0x174)]),_0x96ec0a=_0x46f439[_0x369b71(0x269)]['get'](_0x369b71(0x17d))||'',_0x44c268=(_0x46f439['headers'][_0x369b71(0x13d)](_0x369b71(0x137))||'')['toLowerCase']();if(_0x4677db[_0x369b71(0x1b6)]===_0x369b71(0x355))return Response[_0x369b71(0x223)](_0x4677db[_0x369b71(0x102)][_0x369b71(0x1b4)](_0x369b71(0x241),_0x369b71(0x30e)),0x12d);const _0x1e64d5=await loadConfig(_0x569836),_0x428258=_0x1e64d5[_0x369b71(0x24d)]||_0x1e64d5['uuid'],_0x50ae14=_0x4677db[_0x369b71(0x2ed)][_0x369b71(0x1b4)](/^\/+|\/+$/g,''),_0x3c638d=_0x50ae14[_0x369b71(0x175)]('/');if(_0x3c638d[0x0]===_0x369b71(0x324))return json({'version':VERSION});if(_0x3c638d[0x0]===_0x369b71(0x35d)){if(_0x46f439['method']===_0x369b71(0xfe)){const _0x23e5a4=await _0x46f439[_0x369b71(0x1e2)](),_0x229caf=new URLSearchParams(_0x23e5a4);if(_0x229caf[_0x369b71(0x13d)](_0x369b71(0x2be))===_0x1e64d5[_0x369b71(0x2c4)]){const _0x29e257=md5hex(String(_0x1e64d5['admin']));return new Response(JSON[_0x369b71(0x160)]({'ok':!![],'next':_0x229caf['get'](_0x369b71(0x1d6))||'/'}),{'status':0xc8,'headers':{'Content-Type':'application/json;\x20charset=utf-8','Set-Cookie':_0x369b71(0x202)+_0x29e257+';\x20Path=/;\x20Max-Age=86400;\x20HttpOnly;\x20Secure;\x20SameSite=Lax'}});}return json({'ok':![],'msg':_0x369b71(0x154)},0x193);}if(_0x1e64d5[_0x369b71(0x2c4)])return new Response(loginHTML,{'status':0xc8,'headers':{'Content-Type':_0x369b71(0x305)}});return Response[_0x369b71(0x223)](new URL('/'+_0x428258,_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);}const _0x4e63b4=_0x3c638d[0x0]===_0x428258;if(_0x3c638d[0x0]===''&&isBrowserUA(_0x96ec0a))return Response[_0x369b71(0x223)](new URL('/'+_0x428258,_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);if(_0x4e63b4&&_0x3c638d[_0x369b71(0x258)]===0x1){if(_0x44c268===_0x369b71(0x304))return handleWebSocketProxy(_0x46f439,_0x1e64d5);if(_0x46f439['method']===_0x369b71(0xfe)){if(_0x1e64d5[_0x369b71(0x27d)])try{return await handleXhttpProxy(_0x46f439,_0x1e64d5);}catch(_0x3c4a66){return json({'ok':![],'msg':_0x369b71(0x18a)+(_0x3c4a66['message']||_0x3c4a66)},0x1f4);}}}if(_0x4e63b4&&(_0x3c638d[0x1]===_0x369b71(0x19d)||_0x3c638d['length']===0x1&&!isBrowserUA(_0x96ec0a)&&!_0x96ec0a[_0x369b71(0x372)](_0x369b71(0x23a)))){const _0x3c3fe9=_0x3c638d[_0x369b71(0x258)]>=0x3?_0x3c638d[0x2]:'';try{let _0x5e124d=null;if(_0x1e64d5[_0x369b71(0x246)]!==![]&&_0x569836['K']&&typeof _0x569836['K'][_0x369b71(0x13d)]==='function')try{const _0x4d377f=await _0x569836['K']['get']('issued');if(_0x4d377f){const _0x5a5138=JSON['parse'](_0x4d377f);if(Array['isArray'](_0x5a5138[_0x369b71(0x1b1)])&&_0x5a5138[_0x369b71(0x1b1)][_0x369b71(0x258)])_0x5e124d=new Set(_0x5a5138[_0x369b71(0x1b1)]);}}catch(_0x23a30f){}const _0x3bd343=await generateSubscription(_0x5e124d?Object['assign']({},_0x1e64d5,{'_skipIssued':_0x5e124d}):_0x1e64d5,_0x46f439[_0x369b71(0x174)],_0x3c3fe9,_0x96ec0a,_0x46f439['cf']&&_0x46f439['cf']['colo']);if(_0x1e64d5[_0x369b71(0x246)]!==![]&&_0x569836['K']&&typeof _0x569836['K'][_0x369b71(0x16c)]===_0x369b71(0x2ea)&&_0x3bd343['issued']&&_0x3bd343['issued'][_0x369b71(0x258)]){const _0x18d879=_0x5e124d?Array[_0x369b71(0x35a)](_0x5e124d):[],_0x2d7c9a=[...new Set([..._0x3bd343['issued'],..._0x18d879])]['slice'](0x0,0xc8),_0x2587e0=JSON[_0x369b71(0x160)]({'t':Date[_0x369b71(0x186)](),'ips':_0x2d7c9a});if(_0x569836[_0x369b71(0x179)]&&typeof _0x569836['_ctx'][_0x369b71(0x2bd)]===_0x369b71(0x2ea))_0x569836[_0x369b71(0x179)][_0x369b71(0x2bd)](_0x569836['K']['put'](_0x369b71(0x1d4),_0x2587e0)[_0x369b71(0x1a1)](()=>{}));else await _0x569836['K'][_0x369b71(0x16c)](_0x369b71(0x1d4),_0x2587e0)[_0x369b71(0x1a1)](()=>{});}return new Response(_0x3bd343[_0x369b71(0x187)],{'status':0xc8,'headers':{'Content-Type':_0x3bd343[_0x369b71(0x37b)]+_0x369b71(0x309),'Cache-Control':_0x369b71(0x207),'Content-Disposition':'attachment;\x20filename*=utf-8\x27\x27CFNext'}});}catch(_0x3bcb86){return new Response(_0x369b71(0xff)+(_0x3bcb86&&_0x3bcb86[_0x369b71(0x276)]||_0x3bcb86),{'status':0x1f4,'headers':{'Content-Type':_0x369b71(0x21b)}});}}if(_0x4e63b4&&_0x3c638d[_0x369b71(0x258)]===0x1&&isBrowserUA(_0x96ec0a)){if(!await requireAuth(_0x46f439,_0x1e64d5))return Response[_0x369b71(0x223)](new URL(_0x369b71(0x26f)+encodeURIComponent('/'+_0x428258),_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);return new Response(PANEL_HTML,{'status':0xc8,'headers':{'Content-Type':'text/html;\x20charset=utf-8'}});}if(_0x4e63b4&&_0x3c638d[0x1]===_0x369b71(0x283)){const _0x29cb8f=_0x3c638d[0x2]||'',_0x4d86c9=await requireAuth(_0x46f439,_0x1e64d5);if(!_0x4d86c9)return json({'ok':![],'status':0x193,'msg':_0x369b71(0x337)},0x193);if(_0x29cb8f===_0x369b71(0x384)){if(_0x46f439['method']==='GET')return json({'ok':!![],'data':Object['assign']({},_0x1e64d5,{'version':VERSION})});if(_0x46f439[_0x369b71(0x13b)]==='POST')try{const _0x570ddf=await _0x46f439['json'](),_0x28a551=Object['assign'](JSON[_0x369b71(0x330)](JSON['stringify'](_0x1e64d5)),_0x570ddf);if(_0x570ddf[_0x369b71(0x25e)]&&typeof _0x570ddf[_0x369b71(0x25e)]===_0x369b71(0x1ff))_0x28a551[_0x369b71(0x25e)]=Object[_0x369b71(0x2a0)](_0x28a551[_0x369b71(0x25e)],_0x570ddf[_0x369b71(0x25e)]);if(_0x570ddf[_0x369b71(0x2c3)]&&Array[_0x369b71(0x14f)](_0x570ddf[_0x369b71(0x2c3)]))_0x28a551[_0x369b71(0x2c3)]=_0x570ddf[_0x369b71(0x2c3)];await saveConfig(_0x569836,_0x28a551);const _0xcb65b4=await loadConfig(_0x569836,_0x46f439[_0x369b71(0x174)]);return json({'ok':!![],'data':Object[_0x369b71(0x2a0)]({},_0xcb65b4,{'version':VERSION}),'msg':_0x369b71(0x2cf)});}catch(_0x2d5b06){return json({'ok':![],'msg':'保存失败:\x20'+(_0x2d5b06['message']||_0x2d5b06)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x233)){if(_0x46f439[_0x369b71(0x13b)]!==_0x369b71(0xfe))return json({'ok':![],'msg':_0x369b71(0x25a)},0x195);try{if(!_0x569836['K']||typeof _0x569836['K']['delete']!=='function')return json({'ok':![],'msg':_0x369b71(0x28b)},0x190);return await _0x569836['K']['delete'](_0x369b71(0x384)),await _0x569836['K'][_0x369b71(0x16f)]('issued'),json({'ok':!![],'msg':_0x369b71(0x2b7)});}catch(_0x2ed00b){return json({'ok':![],'msg':_0x369b71(0x2f4)+(_0x2ed00b[_0x369b71(0x276)]||_0x2ed00b)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x308))return json({'ok':!![],'data':{'version':VERSION,'host':_0x4677db['hostname'],'path':_0x428258,'region':_0x46f439['cf']&&_0x46f439['cf'][_0x369b71(0x344)]||'unknown'}});if(_0x29cb8f===_0x369b71(0x37a))try{const _0x397916=await fetchTimeout(UPDATE_RAW_URL,{'headers':{'User-Agent':_0x369b71(0x315)}},0x1f40);if(!_0x397916||!_0x397916['ok'])return json({'ok':![],'msg':_0x369b71(0x1ec)+(_0x397916&&_0x397916[_0x369b71(0x308)])},0x1f6);const _0x56660a=await _0x397916[_0x369b71(0x1e2)](),_0x52533b=_0x56660a[_0x369b71(0x1d8)](/const\s+VERSION\s*=\s*['"]([^'"]+)['"]/),_0x491eac=_0x52533b?_0x52533b[0x1]:'';return json({'ok':!![],'changed':!!_0x491eac&&_0x491eac!==VERSION,'latest':_0x491eac,'current':VERSION,'code':_0x56660a});}catch(_0x354ec9){return json({'ok':![],'msg':_0x369b71(0x2ee)+(_0x354ec9['message']||_0x354ec9)},0x1f4);}if(_0x29cb8f===_0x369b71(0x19d)){const _0x189d9d=_0x4677db[_0x369b71(0x2a5)][_0x369b71(0x13d)](_0x369b71(0x2e2))||'';try{const _0x2cb0d4=await generateSubscription(_0x1e64d5,_0x46f439['url'],_0x189d9d,_0x96ec0a,_0x46f439['cf']&&_0x46f439['cf']['colo']);return json({'ok':!![],'type':_0x2cb0d4[_0x369b71(0x37b)],'body':_0x2cb0d4[_0x369b71(0x187)]});}catch(_0x2fbc72){return json({'ok':![],'msg':'订阅生成失败:\x20'+(_0x2fbc72[_0x369b71(0x276)]||_0x2fbc72)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x2b2)){if(_0x46f439[_0x369b71(0x13b)]!=='POST')return json({'ok':![],'msg':'仅支持\x20POST'},0x195);try{const _0x5d3ca8=await _0x46f439['json']()[_0x369b71(0x1a1)](()=>({})),_0x47728d=await collectCandidates(Object[_0x369b71(0x2a0)]({},_0x1e64d5[_0x369b71(0x25e)],_0x5d3ca8));if(!_0x47728d[_0x369b71(0x2b2)][_0x369b71(0x258)]){const _0x1034ea=_0x47728d[_0x369b71(0x110)]||{},_0x18d228=[_0x1034ea['presetErr']&&'预设源:\x20'+_0x1034ea[_0x369b71(0x1eb)],_0x1034ea['customErr']&&_0x369b71(0x18f)+_0x1034ea[_0x369b71(0x34e)]][_0x369b71(0x30b)](Boolean)[_0x369b71(0x285)]('；');return json({'ok':![],'msg':_0x369b71(0x267)+(_0x18d228?'（'+_0x18d228+'）':'，请换一个数据源')},0x190);}return json({'ok':!![],'data':_0x47728d['candidates'],'stats':_0x47728d[_0x369b71(0x110)]});}catch(_0x343fe3){return json({'ok':![],'msg':_0x369b71(0x29d)+(_0x343fe3[_0x369b71(0x276)]||_0x343fe3)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x121))try{const _0x10bd6a=OPTIMIZE_SOURCES[_0x4677db[_0x369b71(0x2a5)][_0x369b71(0x13d)](_0x369b71(0x18d))||_0x369b71(0x345)]||OPTIMIZE_SOURCES[_0x369b71(0x345)],_0x656940=await fetch(_0x10bd6a[_0x369b71(0x174)],{'headers':{'User-Agent':'Mozilla/5.0'}});if(!_0x656940['ok'])return json({'ok':![],'msg':_0x369b71(0x20c)+_0x656940[_0x369b71(0x308)]});const _0x54c87b=extractDomains(await _0x656940[_0x369b71(0x1e2)]());return json({'ok':!![],'data':_0x54c87b});}catch(_0x125c45){return json({'ok':![],'msg':_0x369b71(0x29d)+(_0x125c45[_0x369b71(0x276)]||_0x125c45)},0x1f4);}return json({'ok':![],'msg':_0x369b71(0x25d)+_0x29cb8f},0x194);}return new Response(_0x369b71(0x1bf),{'status':0x194});}async function handleScheduled(_0xb2355c,_0x1652d2,_0x215c9a){const _0x5d030f=_0x1af6f6,_0x2bc04a=String(_0x1652d2[_0x5d030f(0x1f7)]||'')[_0x5d030f(0x2e7)]();if(_0x2bc04a!=='1'&&_0x2bc04a!==_0x5d030f(0x38d))return;try{const _0x147626=await loadConfig(_0x1652d2),_0x3902d3=await collectCandidates(_0x147626[_0x5d030f(0x25e)]),_0x4a8ca4=_0x3902d3[_0x5d030f(0x2b2)]||[];if(!_0x4a8ca4[_0x5d030f(0x258)])return;const _0x1c8ef8=await runLatencyTest(_0x4a8ca4,_0x147626[_0x5d030f(0x25e)][_0x5d030f(0x140)]||0x5,0x1388),_0x1cc6c2=_0x1c8ef8[_0x5d030f(0x30b)](_0x2e65e4=>_0x2e65e4['ok'])[_0x5d030f(0x310)](0x0,_0x147626[_0x5d030f(0x25e)][_0x5d030f(0x297)]||0x14);if(!_0x1cc6c2[_0x5d030f(0x258)])return;_0x147626[_0x5d030f(0x2c3)]=_0x1cc6c2[_0x5d030f(0x2ba)](_0xab5837=>({'ip':_0xab5837['ip'],'port':_0xab5837[_0x5d030f(0x251)]||0x1bb,'name':''})),await saveConfig(_0x1652d2,_0x147626);}catch(_0x48ed35){}}export default{async 'fetch'(_0x46df90,_0x32013e,_0x567136){return handleRequest(_0x46df90,Object['assign']({},_0x32013e,{'_ctx':_0x567136}));},async 'scheduled'(_0x3d2126,_0x4c5300,_0x553d37){return handleScheduled(_0x3d2126,_0x4c5300,_0x553d37);}};
+</html>`,loginHTML='<!DOCTYPE\x20html>\x0a<html\x20lang=\x22zh-CN\x22>\x0a<head>\x0a<meta\x20charset=\x22utf-8\x22>\x0a<meta\x20name=\x22viewport\x22\x20content=\x22width=device-width,\x20initial-scale=1\x22>\x0a<title>CFNext\x20·\x20登录</title>\x0a<style>\x0abody{background:#0d1117;color:#e6edf3;font-family:\x22PingFang\x20SC\x22,\x22Microsoft\x20YaHei\x22,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}\x0a.box{background:#161b22;border:1px\x20solid\x20#2d333b;border-radius:12px;padding:28px;width:320px}\x0ah1{font-size:18px;margin-bottom:6px}\x0ap{color:#8b949e;font-size:13px;margin:0\x200\x2018px}\x0ainput{width:100%;background:#1c2230;border:1px\x20solid\x20#2d333b;color:#e6edf3;border-radius:8px;padding:10px\x2012px;font-size:14px;outline:none;box-sizing:border-box;margin-bottom:12px}\x0ainput:focus{border-color:#4f9dff}\x0abutton{width:100%;background:#4f9dff;border:none;color:#fff;border-radius:8px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}\x0a.msg{color:#f85149;font-size:13px;margin-bottom:10px;display:none}\x0a</style>\x0a</head>\x0a<body>\x0a<div\x20class=\x22box\x22>\x0a\x20\x20<h1>CFNext</h1>\x0a\x20\x20<p>Silakan masukkan kata sandi administrator</p>\x0a\x20\x20<div\x20class=\x22msg\x22\x20id=\x22msg\x22>Kata sandi salah</div>\x0a\x20\x20<form\x20id=\x22form\x22>\x0a\x20\x20\x20\x20<input\x20type=\x22password\x22\x20id=\x22pwd\x22\x20placeholder=\x22Kata Sandi Admin\x22\x20autofocus>\x0a\x20\x20\x20\x20<button\x20type=\x22submit\x22>Masuk</button>\x0a\x20\x20</form>\x0a</div>\x0a<script>\x0avar\x20next\x20=\x20new\x20URLSearchParams(location.search).get(\x27next\x27)\x20||\x20\x27/\x27;\x0adocument.getElementById(\x27form\x27).addEventListener(\x27submit\x27,\x20function(e){\x0a\x20\x20e.preventDefault();\x0a\x20\x20var\x20pwd\x20=\x20document.getElementById(\x27pwd\x27).value;\x0a\x20\x20fetch(\x27/login\x27,\x20{\x20method:\x20\x27POST\x27,\x20headers:\x20{\x20\x27Content-Type\x27:\x20\x27application/x-www-form-urlencoded\x27\x20},\x20body:\x20\x27password=\x27\x20+\x20encodeURIComponent(pwd)\x20+\x20\x27&next=\x27\x20+\x20encodeURIComponent(next)\x20})\x0a\x20\x20\x20\x20.then(function(r){\x20return\x20r.json();\x20})\x0a\x20\x20\x20\x20.then(function(r){\x0a\x20\x20\x20\x20\x20\x20if(r\x20&&\x20r.ok){\x20location.href\x20=\x20r.next\x20||\x20\x27/\x27;\x20}\x0a\x20\x20\x20\x20\x20\x20else\x20{\x20document.getElementById(\x27msg\x27).style.display\x20=\x20\x27block\x27;\x20}\x0a\x20\x20\x20\x20})\x0a\x20\x20\x20\x20.catch(function(){\x20document.getElementById(\x27msg\x27).textContent\x20=\x20\x27网络错误\x27;\x20document.getElementById(\x27msg\x27).style.display\x20=\x20\x27block\x27;\x20});\x0a});\x0a</script>\x0a</body>\x0a</html>';function isBrowserUA(_0x490aa8){const _0x45664c=_0x1af6f6;return(_0x490aa8||'')['toLowerCase']()[_0x45664c(0x325)]('mozilla');}async function requireAuth(_0x43e7c8,_0x2838b3){const _0x494835=_0x1af6f6;if(!_0x2838b3[_0x494835(0x2c4)])return!![];const _0x1df5ff=_0x43e7c8[_0x494835(0x269)][_0x494835(0x13d)]('Cookie')||'',_0xa704e5=_0x1df5ff[_0x494835(0x1d8)](/(?:^|;\s*)luma_auth=([^;]+)/);return!!(_0xa704e5&&_0xa704e5[0x1]===md5hex(String(_0x2838b3[_0x494835(0x2c4)])));}async function handleRequest(_0x46f439,_0x569836){const _0x369b71=_0x1af6f6,_0x4677db=new URL(_0x46f439[_0x369b71(0x174)]),_0x96ec0a=_0x46f439[_0x369b71(0x269)]['get'](_0x369b71(0x17d))||'',_0x44c268=(_0x46f439['headers'][_0x369b71(0x13d)](_0x369b71(0x137))||'')['toLowerCase']();if(_0x4677db[_0x369b71(0x1b6)]===_0x369b71(0x355))return Response[_0x369b71(0x223)](_0x4677db[_0x369b71(0x102)][_0x369b71(0x1b4)](_0x369b71(0x241),_0x369b71(0x30e)),0x12d);const _0x1e64d5=await loadConfig(_0x569836),_0x428258=_0x1e64d5[_0x369b71(0x24d)]||_0x1e64d5['uuid'],_0x50ae14=_0x4677db[_0x369b71(0x2ed)][_0x369b71(0x1b4)](/^\/+|\/+$/g,''),_0x3c638d=_0x50ae14[_0x369b71(0x175)]('/');if(_0x3c638d[0x0]===_0x369b71(0x324))return json({'version':VERSION});if(_0x3c638d[0x0]===_0x369b71(0x35d)){if(_0x46f439['method']===_0x369b71(0xfe)){const _0x23e5a4=await _0x46f439[_0x369b71(0x1e2)](),_0x229caf=new URLSearchParams(_0x23e5a4);if(_0x229caf[_0x369b71(0x13d)](_0x369b71(0x2be))===_0x1e64d5[_0x369b71(0x2c4)]){const _0x29e257=md5hex(String(_0x1e64d5['admin']));return new Response(JSON[_0x369b71(0x160)]({'ok':!![],'next':_0x229caf['get'](_0x369b71(0x1d6))||'/'}),{'status':0xc8,'headers':{'Content-Type':'application/json;\x20charset=utf-8','Set-Cookie':_0x369b71(0x202)+_0x29e257+';\x20Path=/;\x20Max-Age=86400;\x20HttpOnly;\x20Secure;\x20SameSite=Lax'}});}return json({'ok':![],'msg':_0x369b71(0x154)},0x193);}if(_0x1e64d5[_0x369b71(0x2c4)])return new Response(loginHTML,{'status':0xc8,'headers':{'Content-Type':_0x369b71(0x305)}});return Response[_0x369b71(0x223)](new URL('/'+_0x428258,_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);}const _0x4e63b4=_0x3c638d[0x0]===_0x428258;if(_0x3c638d[0x0]===''&&isBrowserUA(_0x96ec0a))return Response[_0x369b71(0x223)](new URL('/'+_0x428258,_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);if(_0x4e63b4&&_0x3c638d[_0x369b71(0x258)]===0x1){if(_0x44c268===_0x369b71(0x304))return handleWebSocketProxy(_0x46f439,_0x1e64d5);if(_0x46f439['method']===_0x369b71(0xfe)){if(_0x1e64d5[_0x369b71(0x27d)])try{return await handleXhttpProxy(_0x46f439,_0x1e64d5);}catch(_0x3c4a66){return json({'ok':![],'msg':_0x369b71(0x18a)+(_0x3c4a66['message']||_0x3c4a66)},0x1f4);}}}if(_0x4e63b4&&(_0x3c638d[0x1]===_0x369b71(0x19d)||_0x3c638d['length']===0x1&&!isBrowserUA(_0x96ec0a)&&!_0x96ec0a[_0x369b71(0x372)](_0x369b71(0x23a)))){const _0x3c3fe9=_0x3c638d[_0x369b71(0x258)]>=0x3?_0x3c638d[0x2]:'';try{let _0x5e124d=null;if(_0x1e64d5[_0x369b71(0x246)]!==![]&&_0x569836['K']&&typeof _0x569836['K'][_0x369b71(0x13d)]==='function')try{const _0x4d377f=await _0x569836['K']['get']('issued');if(_0x4d377f){const _0x5a5138=JSON['parse'](_0x4d377f);if(Array['isArray'](_0x5a5138[_0x369b71(0x1b1)])&&_0x5a5138[_0x369b71(0x1b1)][_0x369b71(0x258)])_0x5e124d=new Set(_0x5a5138[_0x369b71(0x1b1)]);}}catch(_0x23a30f){}const _0x3bd343=await generateSubscription(_0x5e124d?Object['assign']({},_0x1e64d5,{'_skipIssued':_0x5e124d}):_0x1e64d5,_0x46f439[_0x369b71(0x174)],_0x3c3fe9,_0x96ec0a,_0x46f439['cf']&&_0x46f439['cf']['colo']);if(_0x1e64d5[_0x369b71(0x246)]!==![]&&_0x569836['K']&&typeof _0x569836['K'][_0x369b71(0x16c)]===_0x369b71(0x2ea)&&_0x3bd343['issued']&&_0x3bd343['issued'][_0x369b71(0x258)]){const _0x18d879=_0x5e124d?Array[_0x369b71(0x35a)](_0x5e124d):[],_0x2d7c9a=[...new Set([..._0x3bd343['issued'],..._0x18d879])]['slice'](0x0,0xc8),_0x2587e0=JSON[_0x369b71(0x160)]({'t':Date[_0x369b71(0x186)](),'ips':_0x2d7c9a});if(_0x569836[_0x369b71(0x179)]&&typeof _0x569836['_ctx'][_0x369b71(0x2bd)]===_0x369b71(0x2ea))_0x569836[_0x369b71(0x179)][_0x369b71(0x2bd)](_0x569836['K']['put'](_0x369b71(0x1d4),_0x2587e0)[_0x369b71(0x1a1)](()=>{}));else await _0x569836['K'][_0x369b71(0x16c)](_0x369b71(0x1d4),_0x2587e0)[_0x369b71(0x1a1)](()=>{});}return new Response(_0x3bd343[_0x369b71(0x187)],{'status':0xc8,'headers':{'Content-Type':_0x3bd343[_0x369b71(0x37b)]+_0x369b71(0x309),'Cache-Control':_0x369b71(0x207),'Content-Disposition':'attachment;\x20filename*=utf-8\x27\x27CFNext'}});}catch(_0x3bcb86){return new Response(_0x369b71(0xff)+(_0x3bcb86&&_0x3bcb86[_0x369b71(0x276)]||_0x3bcb86),{'status':0x1f4,'headers':{'Content-Type':_0x369b71(0x21b)}});}}if(_0x4e63b4&&_0x3c638d[_0x369b71(0x258)]===0x1&&isBrowserUA(_0x96ec0a)){if(!await requireAuth(_0x46f439,_0x1e64d5))return Response[_0x369b71(0x223)](new URL(_0x369b71(0x26f)+encodeURIComponent('/'+_0x428258),_0x46f439[_0x369b71(0x174)])[_0x369b71(0x102)],0x12e);return new Response(PANEL_HTML,{'status':0xc8,'headers':{'Content-Type':'text/html;\x20charset=utf-8'}});}if(_0x4e63b4&&_0x3c638d[0x1]===_0x369b71(0x283)){const _0x29cb8f=_0x3c638d[0x2]||'',_0x4d86c9=await requireAuth(_0x46f439,_0x1e64d5);if(!_0x4d86c9)return json({'ok':![],'status':0x193,'msg':_0x369b71(0x337)},0x193);if(_0x29cb8f===_0x369b71(0x384)){if(_0x46f439['method']==='GET')return json({'ok':!![],'data':Object['assign']({},_0x1e64d5,{'version':VERSION})});if(_0x46f439[_0x369b71(0x13b)]==='POST')try{const _0x570ddf=await _0x46f439['json'](),_0x28a551=Object['assign'](JSON[_0x369b71(0x330)](JSON['stringify'](_0x1e64d5)),_0x570ddf);if(_0x570ddf[_0x369b71(0x25e)]&&typeof _0x570ddf[_0x369b71(0x25e)]===_0x369b71(0x1ff))_0x28a551[_0x369b71(0x25e)]=Object[_0x369b71(0x2a0)](_0x28a551[_0x369b71(0x25e)],_0x570ddf[_0x369b71(0x25e)]);if(_0x570ddf[_0x369b71(0x2c3)]&&Array[_0x369b71(0x14f)](_0x570ddf[_0x369b71(0x2c3)]))_0x28a551[_0x369b71(0x2c3)]=_0x570ddf[_0x369b71(0x2c3)];await saveConfig(_0x569836,_0x28a551);const _0xcb65b4=await loadConfig(_0x569836,_0x46f439[_0x369b71(0x174)]);return json({'ok':!![],'data':Object[_0x369b71(0x2a0)]({},_0xcb65b4,{'version':VERSION}),'msg':_0x369b71(0x2cf)});}catch(_0x2d5b06){return json({'ok':![],'msg':'Penyimpanan gagal:\x20'+(_0x2d5b06['message']||_0x2d5b06)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x233)){if(_0x46f439[_0x369b71(0x13b)]!==_0x369b71(0xfe))return json({'ok':![],'msg':_0x369b71(0x25a)},0x195);try{if(!_0x569836['K']||typeof _0x569836['K']['delete']!=='function')return json({'ok':![],'msg':_0x369b71(0x28b)},0x190);return await _0x569836['K']['delete'](_0x369b71(0x384)),await _0x569836['K'][_0x369b71(0x16f)]('issued'),json({'ok':!![],'msg':_0x369b71(0x2b7)});}catch(_0x2ed00b){return json({'ok':![],'msg':_0x369b71(0x2f4)+(_0x2ed00b[_0x369b71(0x276)]||_0x2ed00b)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x308))return json({'ok':!![],'data':{'version':VERSION,'host':_0x4677db['hostname'],'path':_0x428258,'region':_0x46f439['cf']&&_0x46f439['cf'][_0x369b71(0x344)]||'unknown'}});if(_0x29cb8f===_0x369b71(0x37a))try{const _0x397916=await fetchTimeout(UPDATE_RAW_URL,{'headers':{'User-Agent':_0x369b71(0x315)}},0x1f40);if(!_0x397916||!_0x397916['ok'])return json({'ok':![],'msg':_0x369b71(0x1ec)+(_0x397916&&_0x397916[_0x369b71(0x308)])},0x1f6);const _0x56660a=await _0x397916[_0x369b71(0x1e2)](),_0x52533b=_0x56660a[_0x369b71(0x1d8)](/const\s+VERSION\s*=\s*['"]([^'"]+)['"]/),_0x491eac=_0x52533b?_0x52533b[0x1]:'';return json({'ok':!![],'changed':!!_0x491eac&&_0x491eac!==VERSION,'latest':_0x491eac,'current':VERSION,'code':_0x56660a});}catch(_0x354ec9){return json({'ok':![],'msg':_0x369b71(0x2ee)+(_0x354ec9['message']||_0x354ec9)},0x1f4);}if(_0x29cb8f===_0x369b71(0x19d)){const _0x189d9d=_0x4677db[_0x369b71(0x2a5)][_0x369b71(0x13d)](_0x369b71(0x2e2))||'';try{const _0x2cb0d4=await generateSubscription(_0x1e64d5,_0x46f439['url'],_0x189d9d,_0x96ec0a,_0x46f439['cf']&&_0x46f439['cf']['colo']);return json({'ok':!![],'type':_0x2cb0d4[_0x369b71(0x37b)],'body':_0x2cb0d4[_0x369b71(0x187)]});}catch(_0x2fbc72){return json({'ok':![],'msg':'Pembuatan langganan gagal:\x20'+(_0x2fbc72[_0x369b71(0x276)]||_0x2fbc72)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x2b2)){if(_0x46f439[_0x369b71(0x13b)]!=='POST')return json({'ok':![],'msg':'x20POST'},0x195);try{const _0x5d3ca8=await _0x46f439['json']()[_0x369b71(0x1a1)](()=>({})),_0x47728d=await collectCandidates(Object[_0x369b71(0x2a0)]({},_0x1e64d5[_0x369b71(0x25e)],_0x5d3ca8));if(!_0x47728d[_0x369b71(0x2b2)][_0x369b71(0x258)]){const _0x1034ea=_0x47728d[_0x369b71(0x110)]||{},_0x18d228=[_0x1034ea['presetErr']&&'预设源:\x20'+_0x1034ea[_0x369b71(0x1eb)],_0x1034ea['customErr']&&_0x369b71(0x18f)+_0x1034ea[_0x369b71(0x34e)]][_0x369b71(0x30b)](Boolean)[_0x369b71(0x285)]('；');return json({'ok':![],'msg':_0x369b71(0x267)+(_0x18d228?'（'+_0x18d228+'）':'，请换一个数据源')},0x190);}return json({'ok':!![],'data':_0x47728d['candidates'],'stats':_0x47728d[_0x369b71(0x110)]});}catch(_0x343fe3){return json({'ok':![],'msg':_0x369b71(0x29d)+(_0x343fe3[_0x369b71(0x276)]||_0x343fe3)},0x1f4);}}if(_0x29cb8f===_0x369b71(0x121))try{const _0x10bd6a=OPTIMIZE_SOURCES[_0x4677db[_0x369b71(0x2a5)][_0x369b71(0x13d)](_0x369b71(0x18d))||_0x369b71(0x345)]||OPTIMIZE_SOURCES[_0x369b71(0x345)],_0x656940=await fetch(_0x10bd6a[_0x369b71(0x174)],{'headers':{'User-Agent':'Mozilla/5.0'}});if(!_0x656940['ok'])return json({'ok':![],'msg':_0x369b71(0x20c)+_0x656940[_0x369b71(0x308)]});const _0x54c87b=extractDomains(await _0x656940[_0x369b71(0x1e2)]());return json({'ok':!![],'data':_0x54c87b});}catch(_0x125c45){return json({'ok':![],'msg':_0x369b71(0x29d)+(_0x125c45[_0x369b71(0x276)]||_0x125c45)},0x1f4);}return json({'ok':![],'msg':_0x369b71(0x25d)+_0x29cb8f},0x194);}return new Response(_0x369b71(0x1bf),{'status':0x194});}async function handleScheduled(_0xb2355c,_0x1652d2,_0x215c9a){const _0x5d030f=_0x1af6f6,_0x2bc04a=String(_0x1652d2[_0x5d030f(0x1f7)]||'')[_0x5d030f(0x2e7)]();if(_0x2bc04a!=='1'&&_0x2bc04a!==_0x5d030f(0x38d))return;try{const _0x147626=await loadConfig(_0x1652d2),_0x3902d3=await collectCandidates(_0x147626[_0x5d030f(0x25e)]),_0x4a8ca4=_0x3902d3[_0x5d030f(0x2b2)]||[];if(!_0x4a8ca4[_0x5d030f(0x258)])return;const _0x1c8ef8=await runLatencyTest(_0x4a8ca4,_0x147626[_0x5d030f(0x25e)][_0x5d030f(0x140)]||0x5,0x1388),_0x1cc6c2=_0x1c8ef8[_0x5d030f(0x30b)](_0x2e65e4=>_0x2e65e4['ok'])[_0x5d030f(0x310)](0x0,_0x147626[_0x5d030f(0x25e)][_0x5d030f(0x297)]||0x14);if(!_0x1cc6c2[_0x5d030f(0x258)])return;_0x147626[_0x5d030f(0x2c3)]=_0x1cc6c2[_0x5d030f(0x2ba)](_0xab5837=>({'ip':_0xab5837['ip'],'port':_0xab5837[_0x5d030f(0x251)]||0x1bb,'name':''})),await saveConfig(_0x1652d2,_0x147626);}catch(_0x48ed35){}}export default{async 'fetch'(_0x46df90,_0x32013e,_0x567136){return handleRequest(_0x46df90,Object['assign']({},_0x32013e,{'_ctx':_0x567136}));},async 'scheduled'(_0x3d2126,_0x4c5300,_0x553d37){return handleScheduled(_0x3d2126,_0x4c5300,_0x553d37);}};
